@@ -1,0 +1,27 @@
+* {
+  box-sizing: border-box;
+  padding: 0px;
+  margin: 0px;
+  outline: none;
+  border: none;
+}
+
+.main-container {
+  max-width: 768px;
+  margin: 2rem auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.button {
+  padding: 0.25rem 1rem;
+  border-radius: 4px;
+  text-decoration: none;
+  color: white;
+  background-color: transparent;
+  height: 26px;
+  cursor: pointer;
+}

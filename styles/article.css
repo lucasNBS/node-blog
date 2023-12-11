@@ -1,0 +1,18 @@
+@import url("./globals.css");
+
+.buttons-container {
+  display: flex;
+  gap: 1rem;
+}
+
+.back {
+  background-color: rgb(5, 99, 161);
+}
+
+.edit {
+  background-color: rgb(44, 180, 3);
+}
+
+.content {
+  margin-top: 1rem;
+}

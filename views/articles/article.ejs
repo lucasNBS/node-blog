@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/article.css">
+  <title>Blog - Article</title>
+</head>
+
+<body>
+  <main class="main-container">
+    <h1>
+      <%= article.title %>
+    </h1>
+    <span>
+      <%= article.createdAt.toLocaleDateString() %>
+    </span>
+
+    <div class="buttons-container">
+      <a class="button back" href="/">All Articles</a>
+      <a class="button edit" href="/articles/edit/<%= article.slug %>">Edit</a>
+    </div>
+
+    <p class="content">
+      <%= article.content %>
+    </p>
+  </main>
+</body>
+
+</html>

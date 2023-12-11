@@ -1,0 +1,66 @@
+@import url("./globals.css");
+
+.buttons-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 1rem;
+}
+
+.new-article {
+  font-weight: bold;
+  background-color: rgb(60, 255, 0);
+}
+
+.read-more {
+  background-color: rgb(5, 99, 161);
+}
+
+.edit {
+  background-color: rgb(44, 180, 3);
+}
+
+.delete {
+  background-color: rgb(175, 4, 4);
+}
+
+.articles-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.article {
+  width: 100%;
+  padding: 1rem 1.5rem 3rem;
+  border: 1px solid #cdcdcd;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.article-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 0.25rem;
+}
+
+.article-content h2 {
+  font-size: 32px;
+}
+
+.article-content span {
+  color: #cdcdcd;
+  font-size: 14px;
+}
+
+.article-content p {
+  font-size: 16px;
+}
