@@ -1,35 +1,40 @@
 const express = require("express")
-const ArticleModel = require("../models/articleModel")
+const Article = require("../models/articleModel")
 const router = express.Router()
+
+// local storage
+const articlesList = []
 
 // Show create article page
 router.get("/create", (req, res) => {
-  res.render("articles/form", { article: new ArticleModel(), form: "create" })
+  res.render("articles/form", { article: new Article("", "", ""), form: "create" })
 })
 
 // Create article
-router.post("/create", async (req, res) => {
+router.post("/create", (req, res) => {
   const { title, description, content } = req.body
 
-  const article = new ArticleModel({
+  const article = new Article(
     title,
     description,
-    content,
-  })
+    content
+  )
 
   try {
-    await article.save()
+    articlesList.push(article)
+
     res.redirect("/")
   } catch (err) {
+    console.log(err)
     res.render("articles/form", { article, form: "create" })
   }
 })
 
 // Show article's page
-router.get("/:slug", async (req, res) => {
-  const { slug } = req.params
+router.get("/:id", (req, res) => {
+  const { id } = req.params
 
-  const article = await ArticleModel.findOne({ slug })
+  const article = articlesList.find(article => article.id == id)
 
   if (!article) res.redirect("/")
 
@@ -37,45 +42,54 @@ router.get("/:slug", async (req, res) => {
 })
 
 // Show edit article page
-router.get("/edit/:slug", async (req, res) => {
-  const { slug } = req.params
+router.get("/edit/:id", (req, res) => {
+  const { id } = req.params
 
-  const article = await ArticleModel.findOne({ slug })
+  const article = articlesList.find(article => article.id == id)
 
   if (!article) res.redirect("/")
 
-  res.render("articles/form", { article, form: `edit/${slug}?_method=PUT` })
+  res.render("articles/form", { article, form: `edit/${id}?_method=PUT` })
 })
 
 // Edit article
-router.put("/edit/:slug", async (req, res) => {
-  const { slug } = req.params
+router.put("/edit/:id", (req, res) => {
+  const { id } = req.params
   const { title, description, content } = req.body
 
-  const article = await ArticleModel.findOne({ slug })
+  const index = articlesList.findIndex(article => article.id == id)
+
+  const article = articlesList.find(article => article.id == id)
 
   if (!article) {
     res.redirect("/")
   }
 
-  if (title) article.title = title
-  if (description) article.description = description
-  if (content) article.content = content
+  const newArticle = {
+    id: id,
+    title: title ? title : article.title,
+    description: description ? description : article.description,
+    content: content ? content : article.content,
+    createdAt: article.createdAt
+  }
 
   try {
-    await article.save()
+    articlesList.splice(index, 1, newArticle)
     res.redirect("/")
   } catch (err) {
-    res.render("articles/form", { article, form: `edit/${slug}?_method=PUT` })
+    res.render("articles/form", { article, form: `edit/${id}?_method=PUT` })
   }
 })
 
 // Delete article
-router.delete("/delete/:slug", async (req, res) => {
-  const { slug } = req.params
+router.delete("/delete/:id", (req, res) => {
+  const { id } = req.params
 
-  await ArticleModel.findOneAndDelete({ slug })
+  const index = articlesList.findIndex(article => article.id == id)
+
+  articlesList.splice(index, 1)
+
   res.redirect("/")
 })
 
-module.exports = router
+module.exports = { router: router, articlesList: articlesList }

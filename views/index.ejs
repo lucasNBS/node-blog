@@ -27,9 +27,9 @@
             </p>
           </div>
           <div class="buttons-container">
-            <a href="/articles/<%= article.slug %>" class="button read-more">Read More</a>
-            <a href="/articles/edit/<%= article.slug %>" class="button edit">Edit</a>
-            <form action="/articles/delete/<%= article.slug %>?_method=DELETE" method="POST">
+            <a href="/articles/<%= article.id %>" class="button read-more">Read More</a>
+            <a href="/articles/edit/<%= article.id %>" class="button edit">Edit</a>
+            <form action="/articles/delete/<%= article.id %>?_method=DELETE" method="POST">
               <button type="submit" class="button delete">Delete</button>
             </form>
           </div>
